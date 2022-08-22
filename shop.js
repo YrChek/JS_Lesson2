@@ -36,7 +36,7 @@ const goods = {
         name: 'Носки',
         description: 'Носки черные',
         sizes: [22, 23, 24, 25, 26, 27],
-        price: 50,
+        price: 70,
         available: true
     },
 };
@@ -70,23 +70,15 @@ function clearBasket () {
     basket.length = 0;
     listGoodsKey.length = 0;
 }
-
-function totalAmount () {
-    let count = 0;
+function total () {
+    let totalAmount = 0;
+    let totalSumm = 0;
     let len = listGoodsKey.length;
     for (let i = 0; i < len; i++) {
-        count += basket[i].amount;
+        totalAmount += basket[i].amount;
+        totalSumm += basket[i].good.price * basket[i].amount;
     }
-    return count
-}
-
-function totalSumm () {
-    let total = 0;
-    let len = listGoodsKey.length;
-    for (let i = 0; i < len; i++) {
-        total += basket[i].good.price * basket[i].amount
-    }
-    return total
+    return {'totalAmount': totalAmount, 'totalSumm': totalSumm}
 }
 
 clearBasket();
@@ -94,5 +86,4 @@ addBasket(3, 1);
 addBasket(5, 3);
 addBasket(1,1);
 delFromBasked(1);
-console.log('В корзине товаров: ', totalAmount());
-console.log('Сумма всех товаров: ', totalSumm(),' руб.');
+console.log(total())
